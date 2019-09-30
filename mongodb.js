@@ -1,8 +1,11 @@
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
+const { MongoClient, ObjectId } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
+
+const id = new ObjectId()
+console.log(id.id.length)
+console.log(id.toHexString().length)
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
   if (error) {
@@ -12,8 +15,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
   const db = client.db(databaseName)
 
   // db.collection('users').insertOne({
-  //   name: 'Colin',
-  //   age: 29
+  //   name: 'Vikram',
+  //   age: 26,
+  //   _id: id
   // }, (error, result) => {
   //   if (error) {
   //     return console.log('Unable to insert user')
@@ -39,20 +43,20 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
   //   console.log(result.ops)
   // })
 
-  db.collection('tasks').insertMany([
-    {
-      description: 'Get groceries',
-      completed: true
-    },
-    {
-      description: 'Do laundry',
-      completed: false
-    }
-  ], (error, result) => {
-    if (error) { return console.log('Cannot insert tasks', error) }
+  // db.collection('tasks').insertMany([
+  //   {
+  //     description: 'Get groceries',
+  //     completed: true
+  //   },
+  //   {
+  //     description: 'Do laundry',
+  //     completed: false
+  //   }
+  // ], (error, result) => {
+  //   if (error) { return console.log('Cannot insert tasks', error) }
 
-    console.log(result.ops)
-  })
+  //   console.log(result.ops)
+  // })
 
   client.close()
 })
