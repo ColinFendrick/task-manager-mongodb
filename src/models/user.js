@@ -94,7 +94,7 @@ userSchema.pre('save', async function (next) {
 
 // Delete all tasks after removing user
 userSchema.pre('remove', async function (next) {
-  await Task.deleteMany({ owner: user._id })
+  await Task.deleteMany({ owner: this._id })
   next()
 })
 
